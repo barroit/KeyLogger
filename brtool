@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+build_dir=./build
+
+# if [[ $1 == 'clean' && -f "$build_dir/Makefile" ]]
+if [[ $1 == 'clean' ]]
+then
+	# make -C $build_dir clean > /dev/null
+	rm -rf $build_dir
+	exit 0
+fi
+
+cmake -B $build_dir -DCMAKE_BUILD_TYPE=$([[ -z "$1" ]] && echo 'Debug' || echo 'Release')
+
+cmake --build $build_dir
