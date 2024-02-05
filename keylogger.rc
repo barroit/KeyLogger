@@ -1,0 +1,5 @@
+#include "src/resource.hpp"
+
+OIC_TRAY_ICON ICON "grape.ico"
+
+1 24 "keylogger.manifest"

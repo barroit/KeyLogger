@@ -10,6 +10,26 @@ then
 	exit 0
 fi
 
+grep_rdval() { grep "^$1=" remote.info | cut -d '=' -f2; }
+
+rduser=$(grep_rdval username)
+rdpwd=$(grep_rdval password)
+rdaddr=$(grep_rdval address)
+rdws=$(grep_rdval workspace)
+
+if [[ $1 == 'scp' ]]
+then
+	# public key sucks, use sshpass
+	sshpass -p $rdpwd scp $build_dir/keylogger.exe $rduser@$rdaddr:$rdws
+	exit 0
+fi
+
+if [[ $1 == 'rdc' ]]
+then
+	xfreerdp /u:$rduser /p:$rdpwd /v:$rdaddr /w:1920 /h:1080 > /dev/null 2>&1 &
+	exit 0
+fi
+
 cmake -B $build_dir -DCMAKE_BUILD_TYPE=$([[ -z "$1" ]] && echo 'Debug' || echo 'Release')
 
 cmake --build $build_dir
