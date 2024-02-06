@@ -15,9 +15,13 @@ set(CMAKE_CXX_FLAGS "-Wall -Wextra -municode")
 set(CMAKE_CXX_FLAGS_RELEASE "-Werror -O3")
 set(CMAKE_CXX_FLAGS_DEBUG "-O0")
 
+configure_file(config.hpp.in config.hpp)
+
 file(GLOB SOURCES_FILE "src/*.cpp")
 
 add_executable(keylogger WIN32 ${SOURCES_FILE} keylogger.rc)
+
+target_include_directories(keylogger PRIVATE ${PROJECT_BINARY_DIR})
 
 target_link_libraries(keylogger comctl32)
 

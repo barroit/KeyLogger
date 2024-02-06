@@ -1,0 +1,5 @@
+#pragma once
+
+#define VERSION_MAJOR		"@KeyLogger_VERSION_MAJOR@"
+#define VERSION_MINOR		"@KeyLogger_VERSION_MINOR@"
+#define VERSION_PATCH		"@KeyLogger_VERSION_PATCH@"
